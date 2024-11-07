@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trashcan"
+version = "0.0.1"
+description = "TrashCan Segmentation"
+
+requires-python = ">= 3.8, < 3.11"
+
+dependencies = [
+    "torch ~= 2.4",
+    "torchmetrics ~= 0.11",
+    "pytorch-lightning ~= 1.9",
+    "monai ~= 1.1",
+    "Pillow ~= 9.5",
+    "jupyterlab ~= 3.6",
+    "matplotlib ~= 3.7",
+    "opencv-python ~= 4.10",
+    "fire ~= 0.6",
+    "torchvision ~= 0.19",
+    "scikit-image ~= 0.24",
+    "shapely ~= 2.0"
+]
+
+
+
+[project.optional-dependencies]
+lint = [
+    "black ~= 22.6",
+    "autoflake ~= 1.4",
+    "flake8 ~= 4.0",
+    "pyproject-flake8 ~= 0.0.1a4",
+    "isort ~= 5.10",
+    "pre-commit ~= 2.20",
+]
+dev = ["trashcan[lint]"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line_length = 120
+
+[tool.isort]
+profile = "black"
+line_length = 120
+order_by_type = true
+lines_between_types = 1
+combine_as_imports = true
+force_grid_wrap = 2
