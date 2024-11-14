@@ -1,5 +1,4 @@
 import torch
-import cv2
 from PIL import Image
 import numpy as np
 
@@ -103,6 +102,7 @@ class DataLoader:
         )
 
         images, masks = [], []
+        l = 150 if set == "train" else 30
 
         for i, (im_name, im_annots) in enumerate(annots_dict.items()):
             im_path = ims_path + "/" + im_name
@@ -130,6 +130,8 @@ class DataLoader:
                     torch.stack(masks).to(self.device),
                 )
                 images, masks = [], []
+            if i > l:
+                break
 
         if images and masks:
             yield (

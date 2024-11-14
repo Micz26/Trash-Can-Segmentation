@@ -22,4 +22,16 @@ class ResUNetMini(ResUNet):
         self.upconv2 = self._upconv_block(32, 16)
         self.upconv1 = self._upconv_block(16, 8)
 
+        self.decoder1 = self._conv_block(16, 8)
+        self.decoder2 = self._conv_block(32, 16)
+        self.decoder3 = self._conv_block(64, 32)
+        self.decoder4 = self._conv_block(128, 64)
+        self.decoder5 = self._conv_block(256, 128)
+
         self.final_conv = nn.Conv2d(8, N_CLASSES, kernel_size=1)
+
+        # self.decoder1 = self._conv_block(8, 4)
+        # self.decoder2 = self._conv_block(16, 8)
+        # self.decoder3 = self._conv_block(32, 16)
+        # self.decoder4 = self._conv_block(64, 32)
+        # self.decoder5 = self._conv_block(128, 64)

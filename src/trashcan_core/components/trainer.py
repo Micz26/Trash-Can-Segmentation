@@ -27,7 +27,9 @@ class Trainer:
             self.net.train()
             running_loss = 0.0
 
-            for images, labels in self.data_loader:
+            for images, labels in zip(
+                self.data_loader.x_train, self.data_loader.y_train
+            ):
                 images, labels = images.to(self.device), labels.to(self.device)
                 self.optimizer.zero_grad()
 
@@ -48,7 +50,9 @@ class Trainer:
             correct = 0
             total = 0
             with torch.no_grad():
-                for images, labels in self.data_loader:
+                for images, labels in zip(
+                    self.data_loader.x_val, self.data_loader.y_val
+                ):
                     images, labels = images.to(self.device), labels.to(self.device)
 
                     outputs = self.net(images)
@@ -57,8 +61,9 @@ class Trainer:
                     val_loss += loss.item()
 
                     _, predicted = torch.max(outputs, 1)
-                    total += labels.size(0)
-                    correct += (predicted == labels).sum().item()
+                    _, true = torch.max(labels, 1)
+                    total += true.size(0)
+                    correct += (predicted == true).sum().item()
 
             print(
                 f"Validation Loss: {val_loss / len(self.data_loader)}, Accuracy: {100 * correct / total}%"
