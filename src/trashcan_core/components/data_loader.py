@@ -74,6 +74,7 @@ class DataLoader:
         for annot in annots:
             im_id = annot["image_id"]
             im_name = ims[im_id - k]["file_name"]
+            print(f"idx: {im_id - k}")
             if im_name in annots_dict:
                 annots_dict[im_name].append(
                     {
