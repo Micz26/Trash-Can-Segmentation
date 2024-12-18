@@ -93,6 +93,8 @@ class DataLoader:
                         "points": annot["segmentation"],
                     }
                 ]
+            if set == "val" and im_id - k >= 1204:
+                break
 
         return annots_dict
 
