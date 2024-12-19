@@ -17,6 +17,8 @@ def main():
 
     trainer = model.as_trainer(loss=loss, optimizer=optimizer, data_loader=data_loader)
 
+    trainer.crop(256,256)
+
     trainer(20)
 
     trainer.save_model("models/resunet.onnx", input_shape=(1, 3, 256, 480))
