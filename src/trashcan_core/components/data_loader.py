@@ -74,6 +74,7 @@ class DataLoader:
         for annot in annots:
             im_id = annot["image_id"]
             im_name = ims[im_id - k]["file_name"]
+
             if im_name in annots_dict:
                 annots_dict[im_name].append(
                     {
@@ -92,6 +93,8 @@ class DataLoader:
                         "points": annot["segmentation"],
                     }
                 ]
+            if set == "val" and im_id - k >= 1203:
+                break
 
         return annots_dict
 
@@ -102,6 +105,8 @@ class DataLoader:
         )
 
         images, masks = [], []
+
+        l = 800 if set == "train" else 5
 
         for i, (im_name, im_annots) in enumerate(annots_dict.items()):
             im_path = ims_path + "/" + im_name
@@ -129,6 +134,8 @@ class DataLoader:
                     torch.stack(masks).to(self.device),
                 )
                 images, masks = [], []
+            if i >= l:
+                break
 
         if images and masks:
             yield (
