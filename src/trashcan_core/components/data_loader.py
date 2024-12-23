@@ -73,6 +73,7 @@ class DataLoader:
 
         for annot in annots:
             im_id = annot["image_id"]
+            print(f"idx: {im_id - k}")
             im_name = ims[im_id - k]["file_name"]
 
             if im_name in annots_dict:
@@ -106,7 +107,7 @@ class DataLoader:
 
         images, masks = [], []
 
-        l = 800 if set == "train" else 5
+        l = 500 if set == "train" else 30
 
         for i, (im_name, im_annots) in enumerate(annots_dict.items()):
             im_path = ims_path + "/" + im_name
