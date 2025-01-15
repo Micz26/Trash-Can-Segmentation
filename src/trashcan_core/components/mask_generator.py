@@ -51,3 +51,26 @@ class MaskGenerator:
         Y = torch.stack(channels, dim=0) / 255.0
 
         return Y
+
+
+class BinaryMaskGenerator(MaskGenerator):
+    def __init__(self):
+        super().__init__()
+
+    def _create_masks(self, im: Image, im_annots: list[dict[str, any]]):
+        transform = transforms.ToTensor()
+        im_tensor = transform(im)
+
+        mask = torch.zeros(
+            (im_tensor.shape[1], im_tensor.shape[2]), dtype=torch.float32
+        )
+
+        for annot in im_annots:
+            poly = torch.tensor(annot["points"][0], dtype=torch.int32).view(-1, 2)
+            cv2.fillPoly(mask.numpy(), [poly.numpy()], 1)
+
+        mask = torch.clamp(mask, 0, 1)
+
+        mask = mask.unsqueeze(0)
+
+        return mask

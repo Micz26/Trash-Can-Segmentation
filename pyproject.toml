@@ -24,7 +24,8 @@ dependencies = [
     "shapely ~= 2.0",
     "onnx ~= 1.17.0",
     "onnxruntime ~= 1.19.2",
-    "segmentation-models-pytorch ~= 0.3.4"
+    "segmentation-models-pytorch ~= 0.3.4",
+    "streamlit ~= 1.41.1 "
 
 ]
 

@@ -3,6 +3,7 @@ from trashcan_core.components.constants.data_configs import (
     CATEGORIES,
     HUES,
     N_CLASSES,
+    INPUT_DIMS,
 )
 
 from trashcan_core.components.constants.file_paths import (
@@ -16,6 +17,7 @@ __all__ = [
     "CATEGORIES",
     "HUES",
     "N_CLASSES",
+    "INPUT_DIMS",
     "MATERIAL_VERSION_PATH",
     "INSTANCE_VERSION_PATH",
 ]

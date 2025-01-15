@@ -1,5 +1,7 @@
 IMSHAPE = (256, 480, 3)
 
+INPUT_DIMS = (256, 256)
+
 HUES = {
     "rov": 30,  # Distinct for robotic vehicle
     "plant": 120,  # Green for plants
@@ -21,8 +23,8 @@ HUES = {
 
 CATEGORIES = sorted(HUES.keys())
 
-N_CLASSES = len(CATEGORIES) + 1
+N_CLASSES = len(CATEGORIES)
 
-assert (
-    IMSHAPE[0] % 32 == 0 and IMSHAPE[1] % 32 == 0
-), "imshape should be multiples of 32. comment out to test different imshapes."
+assert IMSHAPE[0] % 32 == 0 and IMSHAPE[1] % 32 == 0, (
+    "imshape should be multiples of 32. comment out to test different imshapes."
+)
