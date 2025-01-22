@@ -1,5 +1,4 @@
 import streamlit as st
-import torch
 import cv2
 import numpy as np
 from PIL import Image
@@ -7,17 +6,19 @@ import onnxruntime as ort
 
 from trashcan_core.components.data_loader import CustomDataLoader
 from trashcan_core.components.constants import (
+    LINUX_MATERIAL_VERSION_PATH,
     MATERIAL_VERSION_PATH,
     N_CLASSES,
     HUES,
     INPUT_DIMS,
+    LINUX_FINAL_MODEL_PATH,
+    FINAL_MODEL_PATH,
 )
 
 BATCH_SIZE = 1
-onnx_model_path = "C:\\Users\\mikol\\PythonProjects\\TrashCan\\models\\resunet34v8.onnx"
-ort_session = ort.InferenceSession(onnx_model_path)
+ort_session = ort.InferenceSession(LINUX_FINAL_MODEL_PATH)
 
-data_loader = CustomDataLoader(MATERIAL_VERSION_PATH, batch_size=BATCH_SIZE)
+data_loader = CustomDataLoader(LINUX_MATERIAL_VERSION_PATH, batch_size=BATCH_SIZE)
 data_loader.crop(*INPUT_DIMS)
 
 
@@ -98,3 +99,5 @@ if st.button("Generate Segmentation"):
         file_name=f"segmented_image_{current_index}.png",
         mime="image/png",
     )
+
+# streamlit run src/trashcan_frontend/frontend.py
